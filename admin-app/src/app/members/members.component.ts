@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../member';
-//[..]で一つ上の階層という意味に
-import { MemberService } from '../member.service';
-import { MessageService } from '../message.service';
+import { MEMBERS } from '../mock-members';
+
 
 @Component({
   selector: 'app-members',
@@ -10,19 +9,24 @@ import { MessageService } from '../message.service';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  members: Member[];
 
-  constructor(private memberService: MemberService) { }
+  members = MEMBERS;
+  member: Member = {
+    id: 1,
+    name: '田中太郎'
+  };
+  selectedMember: Member;
 
-  //ライフサイクルメソット
+
+
+  constructor() { }
+
+  //ライフサイクルメソッド初期化されるタイミングで自動で立ち上がる。
   ngOnInit(): void {
-    this.getMembers();
   }
 
-
-
-  getMembers(): void {
-    this.memberService.getMembers() //Observable
-      .subscribe(members => this.members = members );
+  onSelect(member: Member): void {
+    this.selectedMember = member;
   }
+
 }

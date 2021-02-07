@@ -8,7 +8,7 @@ import { MemberService } from '../member.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  members: Member[] =[];
+  members: Member[] = [];
 
   constructor(private memberService: MemberService) { }
 

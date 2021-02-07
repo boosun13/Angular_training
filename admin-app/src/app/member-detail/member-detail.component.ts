@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { Member } from '../member';
+import { ActivatedRoute } from '@angular/router';
 import { MemberService } from '../member.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-member-detail',
@@ -13,12 +13,9 @@ export class MemberDetailComponent implements OnInit {
   @Input() member: Member;
 
   constructor(
-    //URLのパラメータやハッシュフラグメントを取得する
     private route: ActivatedRoute,
     private memberService: MemberService,
-    // ブラウザバックなどのブラウザの機能を使うためのもの
     private location: Location
-
   ) { }
 
   ngOnInit(): void {
@@ -26,13 +23,12 @@ export class MemberDetailComponent implements OnInit {
   }
 
   getMember(): void {
-    //ルーティングのIDを取得
     const id = +this.route.snapshot.paramMap.get('id');
     this.memberService.getMember(id)
       .subscribe(member => this.member = member);
   }
 
-  goBack(): void{
+  goBack(): void {
     this.location.back();
   }
 }

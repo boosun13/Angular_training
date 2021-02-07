@@ -31,4 +31,10 @@ export class MemberDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.memberService.updateMember(this.member)
+      .subscribe(() => this.goBack());
+      //レスポンス後に一つ前の画面に戻る仕組み
+  }
 }
